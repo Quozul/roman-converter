@@ -1,7 +1,7 @@
-use crate::convert_arabic_to_roman_number::ROMAN_NUMERALS;
+use crate::converter::roman_numerals::ROMAN_NUMERALS;
 
 pub fn convert_roman_to_arabic_number(roman_number: impl ToString) -> Result<i32, &'static str> {
-    let roman_number = roman_number.to_string();
+    let roman_number = roman_number.to_string().to_uppercase();
     let mut result = 0;
     let mut i = 0;
 
@@ -138,5 +138,10 @@ mod tests {
     #[test]
     fn convert_MMMCMXCIX_to_3999() {
         assert_eq!(convert_roman_to_arabic_number("MMMCMXCIX").unwrap(), 3999);
+    }
+
+    #[test]
+    fn convert_mmm_to_3000() {
+        assert_eq!(convert_roman_to_arabic_number("mmm").unwrap(), 3000);
     }
 }
